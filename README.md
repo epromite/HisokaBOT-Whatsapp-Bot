@@ -11,7 +11,7 @@
 <details>
  <summary>🥟 Help me!</summary>
  
- [Trakteer](https://trakteer.id/dymaass)
+ [Trakteer](https://trakteer.id/dymass)
  [Saweria](https://saweria.co/dxxoo)
  
 </details>
