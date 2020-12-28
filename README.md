@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://st3.depositphotos.com/2617209/15051/v/600/depositphotos_150510980-stock-illustration-adorable-octopus-character.jpg" width="128" height="128"/>
+<img src="https://media1.giphy.com/media/l1KVbtTJH3oHSWJ2w/giphy.gif" width="128" height="128"/>
 </p>
 <p align="center">
 <a href="https://www.instagram.com/dimaass.cc/"><img title="Whatsapp-Bot" src="https://img.shields.io/badge/Instagram-red?colorA=%ff6699&colorB=%23017e40&style=for-the-badge"></a>
