@@ -65,7 +65,8 @@ let {
 
 const {
     apiNoBg,
-	apiSimi
+     apiSimi,
+     vhtearkey
 } = JSON.parse(fs.readFileSync('./settings/api.json'))
 
 function formatin(duit){
@@ -405,6 +406,110 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                 console.log('Creating text3d text...')
                 const ltext3d = body.slice(8)
                 await dxxoo.sendFileFromUrl(from, `https://docs-jojo.herokuapp.com/api/text3d?text=${ltext3d}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'hartatahta':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text Gambar Hartatahta\nPemakaian: ${prefix}hartatahta [teks]\n\ncontoh: ${prefix}hartatahta Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating Hartatahta text...')
+                const lhartatahta = body.slice(12)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/hartatahta?text=${lhartatahta}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'thundertext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text Gambar thunder\nPemakaian: ${prefix}thundertext [teks]\n\ncontoh: ${prefix}thundertext Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating Thunder text...')
+                const lthundertext = body.slice(13)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/thundertext?text=${lthundertext}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'slidingtext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text Sliding\nPemakaian: ${prefix}slidingtext [teks]\n\ncontoh: ${prefix}slidingtext Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating slidingtext text...')
+                const lslidingtext = body.slice(13)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/slidingtext?text=${lslidingtext}&apikey=${vhtearkey}`, '', 'neh....', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'lovemessagetext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar lovemessage\nPemakaian: ${prefix}lovemessagetext [teks]\n\ncontoh: ${prefix}lovemessagetext Dimas D`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating lovemessagetext text...')
+                const llovemessagetext = body.slice(17)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/lovemessagetext?text=${llovemessagetext}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'glowtext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala glow gitu\nPemakaian: ${prefix}glowtext [teks]\n\ncontoh: ${prefix}glowtext Dimas D`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating glowtext text...')
+                const lglowtext = body.slice(10)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/glowtext?text=${lglowtext}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'romancetext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala romance\nPemakaian: ${prefix}romancetext [teks]\n\ncontoh: ${prefix}romancetext Dimas dan Ujang`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating romancetext text...')
+                const lpartytext = body.slice(11)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/romancetext?text=${lpartytext}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'silktext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar Nature\nPemakaian: ${prefix}textmaker [teks]\n\ncontoh: ${prefix}textmaker Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating textmaker text...')
+                const lsilktext = body.slice(10)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/silktext?text=${lsilktext}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'partytext':
+    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala party\nPemakaian: ${prefix}partytext [teks]\n\ncontoh: ${prefix}partytext Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
+                console.log('Creating partytext text...')
+                const llpartytext = body.slice(11)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/partytext?text=${llpartytext}&apikey=${vhtearkey}`, '', 'Nih...', id)
                     .then(() => console.log('Success creting image!'))
                     .catch(async (err) => {
                         console.error(err)
