@@ -109,6 +109,7 @@ after running it you need to scan the qr
 
 | Fun Group! |Yes|
 | ------------- | ------------- |
+| Truth or Dare|✅|
 | Kutuk Member|✅|
 | Santet Member|✅|
 | Maen Dadu|✅|
@@ -182,8 +183,8 @@ after running it you need to scan the qr
 | tnc|✅|
 | Donasi|✅|
 | Cek Bot Stats|✅|
-| Cek OwnerBot✅|
-| Bot Join Via Link✅|
+| Cek OwnerBot|✅|
+| Bot Join Via Link|✅|
 
 | Groups |Yes|
 | ------------- | ------------- |
