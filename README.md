@@ -39,6 +39,7 @@ Install the dependencies:
 > npm install gify-cli -g
 > npm i google-it
 > npm i brainly-scraper
+> npm i emoji-unicode
 ```
 
 ### Usage
