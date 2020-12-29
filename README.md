@@ -73,6 +73,7 @@ after running it you need to scan the qr
 
 | Creator |Yes|
 | ------------- | ------------- |
+| Respond Emoji to Sticker|✅|
 | Respond img to sticker|✅|
 | Respond img to sticker no bg|✅|
 | Respond url to sticker|✅|
