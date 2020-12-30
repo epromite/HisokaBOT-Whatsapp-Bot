@@ -962,32 +962,32 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     }
                     break;
         //Media
-        case 'ytmp3':
-            if (args.length == 0) return dxxoo.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
-            const linkmp3 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
-			rugaapi.ytmp3(`https://youtu.be/${linkmp3}`)
-            .then(async(res) => {
-				if (res.error) return dxxoo.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
-				await dxxoo.sendFileFromUrl(from, `${res.result.thumb}`, '', `Lagu ditemukan\n\nJudul: ${res.result.title}\nDesc: ${res.result.desc}\nSabar lagi dikirim`, id)
-				await dxxoo.sendFileFromUrl(from, `${res.result.url}`, '', '', id)
-				.catch(() => {
-					dxxoo.reply(from, `URL Ini ${args[0]} Sudah pernah di Download sebelumnya. URL Akan di Reset setelah 1 Jam/60 Menit`, id)
-				})
-			})
-            break
-        case 'ytmp4':
-            if (args.length == 0) return dxxoo.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
-            const linkmp4 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
-			rugaapi.ytmp4(`https://youtu.be/${linkmp4}`)
-            .then(async(res) => {
-				if (res.error) return dxxoo.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
-				await dxxoo.sendFileFromUrl(from, `${res.result.thumb}`, '', `Lagu ditemukan\n\nJudul: ${res.result.title}\nDesc: ${res.result.desc}\nSabar lagi dikirim`, id)
-				await dxxoo.sendFileFromUrl(from, `${res.result.url}`, '', '', id)
-				.catch(() => {
-					dxxoo.reply(from, `URL Ini ${args[0]} Sudah pernah di Download sebelumnya. URL akan di Reset setelah 1 Jam/60 Menit`, id)
-				})
-			})
-            break
+            case 'ytmp3':
+                if (args.length == 0) return aruga.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
+                const linkmp3 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
+                rugaapi.ytmp3(`https://youtu.be/${linkmp3}`)
+                .then(async(res) => {
+                    if (res.error) return aruga.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
+                    await aruga.sendFileFromUrl(from, `${res.result.image}`, '', `Lagu ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\nDuration: ${res.result.duration}\n\nSabar sedang di prosesss....`, id)
+                    await aruga.sendFileFromUrl(from, `${res.result.mp3}`, '.mp3', '', id)
+                    .catch(() => {
+                aruga.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
+            })
+                })
+                break
+            case 'ytmp4':
+                if (args.length == 0) return aruga.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
+                const linkmp4 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
+                rugaapi.ytmp4(`https://youtu.be/${linkmp4}`)
+                .then(async(res) => {
+                    if (res.error) return aruga.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
+                    await aruga.sendFileFromUrl(from, `${res.result.imgUrl}`, '', `Video ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\n\nSabar sedang di prosesss....`, id)
+                    await aruga.sendFileFromUrl(from, `${res.result.UrlVideo}`, '', '', id)
+                    .catch(() => {
+                        aruga.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
+                    })
+                })
+                break
 		case 'fb':
 		case 'facebook':
 			if (args.length == 0) return dxxoo.reply(from, `Untuk mendownload video dari link facebook\nketik: ${prefix}fb [link_fb]`, id)
