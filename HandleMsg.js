@@ -362,7 +362,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 	//Sticker Converter
 
        case 'emojisticker':
-            if (!isGroupMsg) return aruga.reply(from, menuId.textPrem())
             if (args.length !== 1) return aruga.reply(from, 'Kirim perintah #emojisticker [emoji]\nContoh : #emojisticker 😫', id)
             const emoji = emojiUnicode(q)
             await aruga.reply(from, `Wait....`, id)
@@ -704,6 +703,18 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                         dxxoo.reply(from, `pilih on / off\n\n*[Anti Group Link]*\nSetiap member grup yang mengirim pesan mengandung link grup akan di kick oleh bot!`, id)
                     }
                     break  
+    case 'stickertext':
+    if (args.length == 0) return aruga.reply(from, `Membuat Sticker Text\nPemakaian: ${prefix}stickertext [teks]\n\ncontoh: ${prefix}stickertext Dimas`, id)
+                    await aruga.reply(from, `Wait....`, id)
+                console.log('Creating textxgif text...')
+                const ltextxgif = body.slice(13)
+                await aruga.sendStickerfromUrl(from, `https://api.vhtear.com/textxgif?text=${ltextxgif}&apikey=${vhtearkey}`)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await aruga.reply(from, `Error!`, id)
+                    })
+            break
         case 'stickergif':
         case 'stikergif':
             if (isMedia || isQuotedVideo) {
