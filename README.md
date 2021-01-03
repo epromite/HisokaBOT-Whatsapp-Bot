@@ -40,6 +40,9 @@ Install the dependencies:
 > npm i google-it
 > npm i brainly-scraper
 > npm i emoji-unicode
+> npm i canvacord
+> npm i parse-ms
+> npm i ms
 ```
 
 ### Usage
