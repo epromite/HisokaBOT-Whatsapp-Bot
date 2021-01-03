@@ -362,15 +362,15 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 	//Sticker Converter
 
        case 'emojisticker':
-            if (args.length !== 1) return aruga.reply(from, 'Kirim perintah #emojisticker [emoji]\nContoh : #emojisticker 😫', id)
+            if (args.length !== 1) return dxxoo.reply(from, 'Kirim perintah #emojisticker [emoji]\nContoh : #emojisticker 😫', id)
             const emoji = emojiUnicode(q)
-            await aruga.reply(from, `Wait....`, id)
+            await dxxoo.reply(from, `Wait....`, id)
             console.log(`Creating code emoji => ${emoji}`)
-            aruga.sendStickerfromUrl(from, `https://api.vhtear.com/emojitopng?code=${emoji}&apikey=${vhtearkey}`)
+            dxxoo.sendStickerfromUrl(from, `https://api.vhtear.com/emojitopng?code=${emoji}&apikey=${vhtearkey}`)
              .catch ((err) => {
                 console.log(err)
-                aruga.reply(from, 'Maaf, emoji yang kamu kirim tidak support untuk dijadikan sticker, cobalah emoji lain', id)
-                aruga.sendText(ownerNumber, 'Sepertinya emojisticker sedang error : ' + err);
+                dxxoo.reply(from, 'Maaf, emoji yang kamu kirim tidak support untuk dijadikan sticker, cobalah emoji lain', id)
+                dxxoo.sendText(ownerNumber, 'Sepertinya emojisticker sedang error : ' + err);
             })
             break
 	case 'stikertoimg':
@@ -390,43 +390,43 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 			
         // Sticker Creator
                case 'jail':
-                  if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+                  if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
                 try {
                     if (isMedia && isImage) {
                         const ppRaw = await decryptMedia(message, uaOverride)
                         canvas.Canvas.jail(ppRaw)
                             .then(async (buffer) => {
                                 canvas.write(buffer, `${sender.id}_hitlered.jpg`)
-                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
+                                await dxxoo.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
                                 fs.unlinkSync(`${sender.id}_hitlered.jpg`)
                             })
                     } else if (quotedMsg) {
-                        const ppRaw = await aruga.getProfilePicFromServer(quotedMsgObj.sender.id)
+                        const ppRaw = await dxxoo.getProfilePicFromServer(quotedMsgObj.sender.id)
                         canvas.Canvas.jail(ppRaw)
                             .then(async (buffer) => {
                                 canvas.write(buffer, `${sender.id}_hitlered.jpg`)
-                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
+                                await dxxoo.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
                                 fs.unlinkSync(`${sender.id}_hitlered.jpg`)
                             })
                     } else {
-                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
+                        const ppRaw = await dxxoo.getProfilePicFromServer(sender.id)
                         canvas.Canvas.jail(ppRaw)
                             .then(async (buffer) => {
                                 canvas.write(buffer, `${sender.id}_hitlered.jpg`)
-                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, 'Done, Jika ingin Foto Orang yang ingin di Penjara silahkan kirim foto/link image dengan caption #Penjara', id)
+                                await dxxoo.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, 'Done, Jika ingin Foto Orang yang ingin di Penjara silahkan kirim foto/link image dengan caption #Penjara', id)
                                 fs.unlinkSync(`${sender.id}_hitlered.jpg`)
                             })
                     }
                 } catch (err) {
                     console.error(err)
-                    await aruga.reply(from, `Error!\n${err}`, id)
+                    await dxxoo.reply(from, `Error!\n${err}`, id)
                 }
             break
                 case 'kiss':
-                  if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+                  if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
                      try {
                       if (isMedia && isImage) {
-                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
+                        const ppRaw = await dxxoo.getProfilePicFromServer(sender.id)
                         const ppSecond = await decryptMedia(message, uaOverride)
                         if (ppRaw === undefined) {
                             var ppFirst = errorImg
@@ -436,12 +436,12 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                         canvas.Canvas.kiss(ppFirst, ppSecond)
                             .then(async (buffer) => {
                                 canvas.write(buffer, `${sender.id}_kiss.png`)
-                                await aruga.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, 'Done, Jika ingin Foto Orang yang ingin di kiss silahkan kirim foto dengan caption #kiss', id)
+                                await dxxoo.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, 'Done, Jika ingin Foto Orang yang ingin di kiss silahkan kirim foto dengan caption #kiss', id)
                                 fs.unlinkSync(`${sender.id}_kiss.png`)
                             })
                     } else if (quotedMsg) {
-                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
-                        const ppSecond = await aruga.getProfilePicFromServer(quotedMsgObj.sender.id)
+                        const ppRaw = await dxxoo.getProfilePicFromServer(sender.id)
+                        const ppSecond = await dxxoo.getProfilePicFromServer(quotedMsgObj.sender.id)
                         if (ppRaw === undefined) {
                             var ppFirst = errorImg
                         } else {
@@ -450,13 +450,13 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                         canvas.Canvas.kiss(ppFirst, ppSecond)
                             .then(async (buffer) => {
                                 canvas.write(buffer, `${sender.id}_kiss.png`)
-                                await aruga.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, '', id)
+                                await dxxoo.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, '', id)
                                 fs.unlinkSync(`${sender.id}_kiss.png`)
                             })
                     }
                 } catch (err) {
                     console.error(err)
-                    await aruga.reply(from, `Error!\n${err}`, id)
+                    await dxxoo.reply(from, `Error!\n${err}`, id)
                 }
             break
     case 'logopornhub':
@@ -704,15 +704,15 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     }
                     break  
     case 'stickertext':
-    if (args.length == 0) return aruga.reply(from, `Membuat Sticker Text\nPemakaian: ${prefix}stickertext [teks]\n\ncontoh: ${prefix}stickertext Dimas`, id)
-                    await aruga.reply(from, `Wait....`, id)
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Sticker Text\nPemakaian: ${prefix}stickertext [teks]\n\ncontoh: ${prefix}stickertext Dimas`, id)
+                    await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating textxgif text...')
                 const ltextxgif = body.slice(13)
-                await aruga.sendStickerfromUrl(from, `https://api.vhtear.com/textxgif?text=${ltextxgif}&apikey=${vhtearkey}`)
+                await dxxoo.sendStickerfromUrl(from, `https://api.vhtear.com/textxgif?text=${ltextxgif}&apikey=${vhtearkey}`)
                     .then(() => console.log('Success creting image!'))
                     .catch(async (err) => {
                         console.error(err)
-                        await aruga.reply(from, `Error!`, id)
+                        await dxxoo.reply(from, `Error!`, id)
                     })
             break
         case 'stickergif':
@@ -1048,28 +1048,28 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     break;
         //Media
             case 'ytmp3':
-                if (args.length == 0) return aruga.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
+                if (args.length == 0) return dxxoo.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
                 const linkmp3 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
                 rugaapi.ytmp3(`https://youtu.be/${linkmp3}`)
                 .then(async(res) => {
-                    if (res.error) return aruga.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
-                    await aruga.sendFileFromUrl(from, `${res.result.image}`, '', `Lagu ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\nDuration: ${res.result.duration}\n\nSabar sedang di prosesss....`, id)
-                    await aruga.sendFileFromUrl(from, `${res.result.mp3}`, '.mp3', '', id)
+                    if (res.error) return dxxoo.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
+                    await dxxoo.sendFileFromUrl(from, `${res.result.image}`, '', `Lagu ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\nDuration: ${res.result.duration}\n\nSabar sedang di prosesss....`, id)
+                    await dxxoo.sendFileFromUrl(from, `${res.result.mp3}`, '.mp3', '', id)
                     .catch(() => {
-                aruga.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
+                dxxoo.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
             })
                 })
                 break
             case 'ytmp4':
-                if (args.length == 0) return aruga.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
+                if (args.length == 0) return dxxoo.reply(from, `Untuk mendownload lagu dari youtube\nketik: ${prefix}ytmp3 [link_yt]`, id)
                 const linkmp4 = args[0].replace('https://youtu.be/','').replace('https://www.youtube.com/watch?v=','')
                 rugaapi.ytmp4(`https://youtu.be/${linkmp4}`)
                 .then(async(res) => {
-                    if (res.error) return aruga.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
-                    await aruga.sendFileFromUrl(from, `${res.result.imgUrl}`, '', `Video ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\n\nSabar sedang di prosesss....`, id)
-                    await aruga.sendFileFromUrl(from, `${res.result.UrlVideo}`, '', '', id)
+                    if (res.error) return dxxoo.sendFileFromUrl(from, `${res.url}`, '', `${res.error}`)
+                    await dxxoo.sendFileFromUrl(from, `${res.result.imgUrl}`, '', `Video ditemukan\n\nJudul: ${res.result.title}\nSize: ${res.result.size}\n\nSabar sedang di prosesss....`, id)
+                    await dxxoo.sendFileFromUrl(from, `${res.result.UrlVideo}`, '', '', id)
                     .catch(() => {
-                        aruga.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
+                        dxxoo.reply(from, `URL INI ${args[0]} SUDAH PERNAH DI DOWNLOAD SEBELUMNYA ..URL AKAN RESET SETELAH 60 MENIT`, id)
                     })
                 })
                 break
@@ -1434,10 +1434,10 @@ module.exports = HandleMsg = async (dxxoo, message) => {
             
         // Other Command
         case 'shopee':
-            if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-            if (args.length == 0) return aruga.reply(from, `Kirim perintah *${prefix}shopee [ Query ]*\n\nContoh : *${prefix}shopee HP Samsul a20*`, id)
+            if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (args.length == 0) return dxxoo.reply(from, `Kirim perintah *${prefix}shopee [ Query ]*\n\nContoh : *${prefix}shopee HP Samsul a20*`, id)
             const shopek = body.slice(8)
-            aruga.reply(from, 'Wait.....', id)
+            dxxoo.reply(from, 'Wait.....', id)
             try {
                 const dataplai = await axios.get(`https://api.vhtear.com/shopee?query=${shopek}&count=5&apikey=${vhtearkey}`)
                 const dataplay = dataplai.data.result
@@ -1445,10 +1445,26 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                 for (let i = 0; i < dataplay.items.length; i++) {
                     shopeq += `\n─────────────────\n\n• *Nama* : ${dataplay.items[i].nama}\n• Harga* : ${dataplay.items[i].harga}\n• *Terjual* : ${dataplay.items[i].terjual}\n• *Lokasi Toko* : ${dataplay.items[i].shop_location}\n• *Deskripsi* : ${dataplay.items[i].description}\n• *Link Product : ${dataplay.items[i].link_product}*\n`
                 }
-                await aruga.sendFileFromUrl(from, dataplay.items[0].image_cover, `shopee.jpg`, shopeq, id)
+                await dxxoo.sendFileFromUrl(from, dataplay.items[0].image_cover, `shopee.jpg`, shopeq, id)
             } catch (err){
                 console.log(err)
             }
+            break
+        case 'infomotor':
+if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (args.length == 0) return dxxoo.reply(from, `Kirim perintah *${prefix}infomotor [ Merek Motor ]*\n\nContoh : *${prefix}infomotor vario 150*`, id)
+        const motoy = body.slice(11)
+        dxxoo.reply(from, 'Sabar cin lagi aq carii....\n\nKalo Kaga Muncul Ada yang salah', id)
+        try {
+            const datamotoy = await axios.get (`https://api.vhtear.com/infomotor?merk=${motoy}&apikey=${vhtearkey}`)
+            const { title, spesifikasi, kelebihan, kekurangan, harga, image  } = datamotoy.data.result
+            const motoytemu = `*${title}:*\n${spesifikasi}\n\n*Kelebihan:* ${kelebihan}\n\n*Kekurangan:* ${kekurangan}\n\n*Harga:* ${harga}\n\nNyari Doang Beli kaga 🤭`
+            const motoyimage = `${image}`
+            dxxoo.sendImage(from, motoyimage, title, motoytemu)
+                } catch (err) {
+                    console.error(err)
+                    await dxxoo.reply(from, `Error!`, id)
+                }
             break
             case 'spamcall':
         if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
