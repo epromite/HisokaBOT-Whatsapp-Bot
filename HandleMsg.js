@@ -114,6 +114,9 @@ module.exports = HandleMsg = async (dxxoo, message) => {
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
 	    const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
         const emojiUnicode = require('emoji-unicode')
+        const canvas = require('canvacord')
+        const ms = require('parse-ms')
+        const toMs = require('ms')
         const q = args.join(' ')
 		// [IDENTIFY]
 		const isOwnerBot = ownerNumber.includes(pengirim)
@@ -357,6 +360,7 @@ module.exports = HandleMsg = async (dxxoo, message) => {
         }
 
 	//Sticker Converter
+
        case 'emojisticker':
             if (!isGroupMsg) return aruga.reply(from, menuId.textPrem())
             if (args.length !== 1) return aruga.reply(from, 'Kirim perintah #emojisticker [emoji]\nContoh : #emojisticker 😫', id)
@@ -386,6 +390,76 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 			
 			
         // Sticker Creator
+               case 'jail':
+                  if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+                try {
+                    if (isMedia && isImage) {
+                        const ppRaw = await decryptMedia(message, uaOverride)
+                        canvas.Canvas.jail(ppRaw)
+                            .then(async (buffer) => {
+                                canvas.write(buffer, `${sender.id}_hitlered.jpg`)
+                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
+                                fs.unlinkSync(`${sender.id}_hitlered.jpg`)
+                            })
+                    } else if (quotedMsg) {
+                        const ppRaw = await aruga.getProfilePicFromServer(quotedMsgObj.sender.id)
+                        canvas.Canvas.jail(ppRaw)
+                            .then(async (buffer) => {
+                                canvas.write(buffer, `${sender.id}_hitlered.jpg`)
+                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, '', id)
+                                fs.unlinkSync(`${sender.id}_hitlered.jpg`)
+                            })
+                    } else {
+                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
+                        canvas.Canvas.jail(ppRaw)
+                            .then(async (buffer) => {
+                                canvas.write(buffer, `${sender.id}_hitlered.jpg`)
+                                await aruga.sendFile(from, `${sender.id}_hitlered.jpg`, `${sender.id}_hitlered.jpg`, 'Done, Jika ingin Foto Orang yang ingin di Penjara silahkan kirim foto/link image dengan caption #Penjara', id)
+                                fs.unlinkSync(`${sender.id}_hitlered.jpg`)
+                            })
+                    }
+                } catch (err) {
+                    console.error(err)
+                    await aruga.reply(from, `Error!\n${err}`, id)
+                }
+            break
+                case 'kiss':
+                  if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+                     try {
+                      if (isMedia && isImage) {
+                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
+                        const ppSecond = await decryptMedia(message, uaOverride)
+                        if (ppRaw === undefined) {
+                            var ppFirst = errorImg
+                        } else {
+                            var ppFirst = ppRaw
+                        }
+                        canvas.Canvas.kiss(ppFirst, ppSecond)
+                            .then(async (buffer) => {
+                                canvas.write(buffer, `${sender.id}_kiss.png`)
+                                await aruga.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, 'Done, Jika ingin Foto Orang yang ingin di kiss silahkan kirim foto dengan caption #kiss', id)
+                                fs.unlinkSync(`${sender.id}_kiss.png`)
+                            })
+                    } else if (quotedMsg) {
+                        const ppRaw = await aruga.getProfilePicFromServer(sender.id)
+                        const ppSecond = await aruga.getProfilePicFromServer(quotedMsgObj.sender.id)
+                        if (ppRaw === undefined) {
+                            var ppFirst = errorImg
+                        } else {
+                            var ppFirst = ppRaw
+                        }
+                        canvas.Canvas.kiss(ppFirst, ppSecond)
+                            .then(async (buffer) => {
+                                canvas.write(buffer, `${sender.id}_kiss.png`)
+                                await aruga.sendFile(from, `${sender.id}_kiss.png`, `${sender.id}_kiss.png`, '', id)
+                                fs.unlinkSync(`${sender.id}_kiss.png`)
+                            })
+                    }
+                } catch (err) {
+                    console.error(err)
+                    await aruga.reply(from, `Error!\n${err}`, id)
+                }
+            break
     case 'logopornhub':
             if (args.length === 1) return dxxoo.reply(from, `Kirim perintah *#logopornhub [ |Teks1|Teks2 ]*,\n\n contoh : *#pornhub |Dimas| HUB*`, id)
             argz = body.trim().split('|')
@@ -1348,6 +1422,23 @@ module.exports = HandleMsg = async (dxxoo, message) => {
             break
             
         // Other Command
+        case 'shopee':
+            if (!isGroupMsg) return aruga.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (args.length == 0) return aruga.reply(from, `Kirim perintah *${prefix}shopee [ Query ]*\n\nContoh : *${prefix}shopee HP Samsul a20*`, id)
+            const shopek = body.slice(8)
+            aruga.reply(from, 'Wait.....', id)
+            try {
+                const dataplai = await axios.get(`https://api.vhtear.com/shopee?query=${shopek}&count=5&apikey=${vhtearkey}`)
+                const dataplay = dataplai.data.result
+                 let shopeq = `*「 SHOPEE 」*\n\n*Hasil Pencarian : ${shopek}*\n`
+                for (let i = 0; i < dataplay.items.length; i++) {
+                    shopeq += `\n─────────────────\n\n• *Nama* : ${dataplay.items[i].nama}\n• Harga* : ${dataplay.items[i].harga}\n• *Terjual* : ${dataplay.items[i].terjual}\n• *Lokasi Toko* : ${dataplay.items[i].shop_location}\n• *Deskripsi* : ${dataplay.items[i].description}\n• *Link Product : ${dataplay.items[i].link_product}*\n`
+                }
+                await aruga.sendFileFromUrl(from, dataplay.items[0].image_cover, `shopee.jpg`, shopeq, id)
+            } catch (err){
+                console.log(err)
+            }
+            break
             case 'spamcall':
         if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
                 if (args.length !== 1) return dxxoo.reply(from, `Untuk menggunakan fitur spamcall, ketik :\n${prefix}spamcall 8xxxxxxxxxx\n\nContoh: ${prefix}spamcall 81288888888`, id)
