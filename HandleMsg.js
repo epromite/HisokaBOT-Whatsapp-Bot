@@ -1450,6 +1450,22 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                 console.log(err)
             }
             break
+        case 'infomobil':
+           if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
+            if (args.length == 0) return dxxoo.reply(from, `Kirim perintah *${prefix}infomobil [ Merek Motor ]*\n\nContoh : *${prefix}infomobil avanza*`, id)
+        const mobill = body.slice(11)
+        dxxoo.reply(from, 'Sabar cin lagi aq carii....\n\nKalo Kaga Muncul Ada yang salah', id)
+        try {
+            const datamobill = await axios.get (`https://api.vhtear.com/infomobil?merk=${mobill}&apikey=${vhtearkey}`)
+            const { title, spesifikasi, kelebihan, kekurangan, harga, image  } = datamobill.data.result
+            const mobilltemu = `*${title}:*\n${spesifikasi}\n\n*Kelebihan:* ${kelebihan}\n\n*Kekurangan:* ${kekurangan}\n\n*Harga:* ${harga}\n\nNyari Doang Beli kaga 🤭`
+            const mobillimage = `${image}`
+            dxxoo.sendImage(from, mobillimage, title, mobilltemu)
+                } catch (err) {
+                    console.error(err)
+                    await dxxoo.reply(from, `Error!`, id)
+                }
+            break
         case 'infomotor':
 if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
             if (args.length == 0) return dxxoo.reply(from, `Kirim perintah *${prefix}infomotor [ Merek Motor ]*\n\nContoh : *${prefix}infomotor vario 150*`, id)
