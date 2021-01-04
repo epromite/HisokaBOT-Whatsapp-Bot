@@ -459,6 +459,32 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     await dxxoo.reply(from, `Error!\n${err}`, id)
                 }
             break
+    case 'mascotlogo':
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Mascot Giming\nPemakaian: ${prefix}mascotlogo [teks]\n\ncontoh: ${prefix}mascotlogo Dimas`, id)
+                    await dxxoo.reply(from, `Sabar ya cin lagi aq prosess....`, id)
+                console.log('Creating mascotlogo text...')
+                const lmascotlogo = body.slice(12)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/gamelogo?text=${lmascotlogo}&apikey=${vhtearkey}`, '', 'Nih...', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+    case 'logoml':
+            if (args.length === 1) return dxxoo.reply(from, `Kirim perintah *#logoml |Hero| Text*,\n\n contoh : *#logoml |layla| DXXOO*`, id)
+            argz = body.trim().split('|')
+            if (argz.length >= 2) {
+                dxxoo.reply(from, `sabar brok eug proses dolo....`, id)
+                const lheroml = argz[1]
+                const llogoml = argz[2]   
+                if (lheroml > 10) return dxxoo.reply(from, '*Masukin Nama Hero*\n_Contoh : layla_', id)
+                if (llogoml > 10) return dxxoo.reply(from, '*Masukan Text*\n_Maksimal 10 huruf!_', id)
+                dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/logoml?hero=${lheroml}&text=${llogoml}&apikey=${vhtearkey}`)
+            } else {
+                await dxxoo.reply(from, `Wrong Format!\n[❗] Kirim perintah *#logoml |Hero| Text*,\n\n contoh : *#logoml |layla| DXXOO*`, id)
+            }
+            break
     case 'logopornhub':
             if (args.length === 1) return dxxoo.reply(from, `Kirim perintah *#logopornhub [ |Teks1|Teks2 ]*,\n\n contoh : *#pornhub |Dimas| HUB*`, id)
             argz = body.trim().split('|')
@@ -500,7 +526,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'hartatahta':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text Gambar Hartatahta\nPemakaian: ${prefix}hartatahta [teks]\n\ncontoh: ${prefix}hartatahta Dimas`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating Hartatahta text...')
@@ -513,7 +538,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'thundertext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text Gambar thunder\nPemakaian: ${prefix}thundertext [teks]\n\ncontoh: ${prefix}thundertext Dimas`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating Thunder text...')
@@ -526,7 +550,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'slidingtext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text Sliding\nPemakaian: ${prefix}slidingtext [teks]\n\ncontoh: ${prefix}slidingtext Dimas`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating slidingtext text...')
@@ -539,7 +562,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'lovemessagetext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar lovemessage\nPemakaian: ${prefix}lovemessagetext [teks]\n\ncontoh: ${prefix}lovemessagetext Dimas D`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating lovemessagetext text...')
@@ -552,7 +574,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'glowtext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala glow gitu\nPemakaian: ${prefix}glowtext [teks]\n\ncontoh: ${prefix}glowtext Dimas D`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating glowtext text...')
@@ -565,7 +586,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'romancetext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala romance\nPemakaian: ${prefix}romancetext [teks]\n\ncontoh: ${prefix}romancetext Dimas dan Ujang`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating romancetext text...')
@@ -578,7 +598,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'silktext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar Nature\nPemakaian: ${prefix}textmaker [teks]\n\ncontoh: ${prefix}textmaker Dimas`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating textmaker text...')
@@ -591,7 +610,6 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                     })
             break
     case 'partytext':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
     if (args.length == 0) return dxxoo.reply(from, `Membuat Text jadi Gambar ala ala party\nPemakaian: ${prefix}partytext [teks]\n\ncontoh: ${prefix}partytext Dimas`, id)
                     await dxxoo.reply(from, `Wait....`, id)
                 console.log('Creating partytext text...')
@@ -1483,7 +1501,6 @@ if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan da
                 }
             break
             case 'spamcall':
-        if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
                 if (args.length !== 1) return dxxoo.reply(from, `Untuk menggunakan fitur spamcall, ketik :\n${prefix}spamcall 8xxxxxxxxxx\n\nContoh: ${prefix}spamcall 81288888888`, id)
                 rugaapi.spamcall(args[0])
                 .then(async (res) => {
@@ -1491,7 +1508,6 @@ if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan da
                 })
                 break
             case 'spamcall2':
-        if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
                 if (args.length !== 1) return dxxoo.reply(from, `Untuk menggunakan fitur spamcall, ketik :\n${prefix}spamcall 8xxxxxxxxxx\n\nContoh: ${prefix}spamcall 81288888888`, id)
                 rugaapi.spamcall2(args[0])
                 .then(async (res) => {
@@ -1588,7 +1604,6 @@ if (!isGroupMsg) return dxxoo.reply(from, `Perintah ini hanya bisa di gunakan da
 ${desc}\n\nBy : @dimaass.cc`)
             break
         case 'namaninja':
-        if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
             if (args.length == 0) return dxxoo.reply(from, `Untuk mengganti nama kamu menjadi nama ninja\nketik ${prefix}namaninja namakamu`, id)
             rugaapi.namaninja(body.slice(10))
             .then(async(res) => {
@@ -1676,7 +1691,6 @@ ${desc}\n\nBy : @dimaass.cc`)
     dxxoo.reply(from, 'Sebelum bermain berjanjilah akan melaksanakan apapun perintah yang diberikan.\n\nSilahkan Pilih:\n➥ #truth\n➥ #dare', id)
     break
     case 'truth':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
             fetch('https://raw.githubusercontent.com/AlvioAdjiJanuar/random/main/truth.txt')
             .then(res => res.text())
             .then(body => {
@@ -1689,7 +1703,6 @@ ${desc}\n\nBy : @dimaass.cc`)
             })
             break
     case 'dare':
-    if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem())
             fetch('https://raw.githubusercontent.com/AlvioAdjiJanuar/random/main/dare.txt')
             .then(res => res.text())
             .then(body => {
