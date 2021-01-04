@@ -846,7 +846,19 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                 dxxoo.reply(from, 'Ada yang Error!', id)
             })
             break
-
+    case 'nulis2':
+    if (args.length == 0) return dxxoo.reply(from, `Membuat Text Sliding\nPemakaian: ${prefix}nulis2 [teks]\n\ncontoh: ${prefix}nulis2 Dimas`, id)
+                    await dxxoo.reply(from, `sabar ya aq nuliss dulu....`, id)
+                console.log('sedang menulis...')
+                const nulis2q = body.slice(8)
+                await dxxoo.sendFileFromUrl(from, `https://api.vhtear.com/write?text=${nulis2q}&apikey=${vhtearkey}`, '', 'nih pemalas....', id)
+                    .then(() => console.log('Success creting image!'))
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, `Error!`, id)
+                    })
+            break
+			
     //Education
         case 'wiki':
             if (args.length == 0) return dxxoo.reply(from, `Untuk mencari suatu kata dari wikipedia\nketik: ${prefix}wiki [kata]`, id)
