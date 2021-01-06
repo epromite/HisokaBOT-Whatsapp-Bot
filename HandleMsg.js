@@ -1051,6 +1051,23 @@ module.exports = HandleMsg = async (dxxoo, message) => {
                 dxxoo.reply(from, 'Ada yang Error!', id)
             })
             break
+        //Kristiani
+          case 'alkitab':
+            if (args.length == 0) return dxxoo,reply(from, `Kirim perintah *${prefix}alkitab* [ Ayat ]\n\n*Contoh :* ${prefix}alkitab matius`, id)
+            const alkitabx = body.slice(9)
+            dxxoo,reply(from, 'Wait.....', id)
+            try {
+                const dataplai = await axios.get(`https://docs-jojo.herokuapp.com/api/alkitabsearch?q=${alkitabx}`)
+                const dataplay = dataplai.data
+                 let alkitabb = `*「 ALKITAB SEARCH 」*\n\n*Hasil Pencarian:* ${alkitabx}\n`
+                for (let i = 0; i < dataplay.result.length; i++) {
+                    alkitabb += `\n─────────────────\n\n• *Ayat* : ${dataplay.result[i].ayat}\n• *Isi* : ${dataplay.result[i].isi}\n`
+                }
+                await dxxoo,reply(from, alkitabb, id)
+            } catch (err){
+                console.log(err)
+            }
+            break	
 	//Group All User
 	case 'grouplink':
             if (!isGroupAdmins) return dxxoo.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
