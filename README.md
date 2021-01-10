@@ -161,6 +161,7 @@ after running it you need to scan the qr
 | Cerita Sex|✅|
 | Cerita Pendek|✅|
 | Puisi|✅|
+| F My Life|✅|
 
 | Random image |Yes|
 | ------------- | ------------- |
@@ -169,6 +170,8 @@ after running it you need to scan the qr
 | Anime |✅|
 | Kpop |✅|
 | Memes |✅|
+| Meme +62|✅|
+| Dark Jokes|✅|
 
 
 | Others |Yes|
