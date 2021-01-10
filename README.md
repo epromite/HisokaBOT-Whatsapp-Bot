@@ -17,7 +17,7 @@
 </details>
 
 Jangan Pelit Atuhh, yuu Donate
-<p align="center"><a href="https://instagram.com/dimaass.cc/" target="_blank">Chat Me</a>.</p>
+<p align="center"><a href="https://dxxoo.herokuapp.com/" target="_blank">Chat Me</a>.</p>
 </div>
 
 ## Getting Started
