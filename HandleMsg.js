@@ -124,7 +124,166 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 		const isSimi = simi.includes(chatId)
 		const isNgegas = ngegas.includes(chatId)
 		const isKasar = await cariKasar(chats)
+                let pendaftar = JSON.parse(fs.readFileSync('./lib/data/user.json'))
+		const SN = GenerateSerialNumber("000000000000000000000000")
+		const { level, card } = require('./lib/data/function')
 
+        //database level
+        const _leveling = JSON.parse(fs.readFileSync('./lib/data/function/group/leveling.json'))
+        const _level = JSON.parse(fs.readFileSync('./lib/data/function/user/level.json'))
+        const _bg = JSON.parse(fs.readFileSync('./lib/data/function/user/card/background.json'))
+        const isLevelingOn = isGroupMsg ? _leveling.includes(groupId) : false
+
+        // Leveling [BETA] by Slavyan
+        if (isGroupMsg && isReg && !isBanned && isLevelingOn) {
+            const currentLevel = level.getLevelingLevel(sender.id, _level)
+            const currentXp = level.getLevelingXp(sender.id, _level)
+            const checkId = level.getLevelingId(sender.id, _level)
+            const checkRole = level.getLevelingRole(sender.id, _level)
+            const checkBg = card.getBg(sender.id, _bg)
+            try {
+                if (currentLevel === undefined && checkId === undefined) level.addLevelingId(sender.id, _level)
+                if (checkBg === undefined) card.addBg(sender.id, _bg)
+                if (checkRole === undefined) level.pushLevelingRole(sender.id, 'METAL', currentXp, currentLevel, _level)
+                const amountXp = Math.floor(Math.random() * 10) + 150
+                const requiredXp = 200 * (Math.pow(2, currentLevel) - 1)
+                const getLevel = level.getLevelingLevel(sender.id, _level)
+                const getRole = level.getLevelingRole(sender.id, _level)
+                level.addLevelingXp(sender.id, amountXp, _level)
+                if (requiredXp <= level.getLevelingXp(sender.id, _level)) {
+                    level.addLevelingLevel(sender.id, 1, _level)
+                    const fetchXp = 200 * (Math.pow(2, level.getLevelingLevel(sender.id, _level)) - 1)
+                    if (5 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IRON I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (10 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IRON II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (15 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IRON III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (20 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'BRONZE I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (25 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'BRONZE II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (30 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'BRONZE III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (35 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'SILVER I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (40 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'SILVER II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (45 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'SILVER III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (50 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'GOLD I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (55 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'GOLD II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (60 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'GOLD III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (65 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'PLATINUM I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (70 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'PLATINUM II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (75 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'PLATINUM III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (80 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'DIAMOND I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (85 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'DIAMOND II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (90 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'DIAMOND III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (95 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IMMORTAL I', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (100 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IMMORTAL II', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (110 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'IMMORTAL III', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (150 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'RADIANT', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else if (200 <= level.getLevelingLevel(sender.id, _level)) {
+                        level.addLevelingRole(sender.id, 'L O R D', _level)
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n➸ *Role*: ${getRole} -> ${level.getLevelingRole(sender.id, _level)} 🆙\nCongrats!! 🎉🎉`, id)
+                    } else {
+                        await dxxoo.reply(from, `*「 LEVEL UP 」*\n\n➸ *Name*: ${pushname}\n➸ *XP*: ${level.getLevelingXp(sender.id, _level)} / ${fetchXp}\n➸ *Level*: ${getLevel} -> ${level.getLevelingLevel(sender.id, _level)} 🆙\n\nCongrats!! 🎉🎉`, id)
+                    }
+                }
+            } catch (err) {
+                console.error(err)
+            }
+        }		
+		
+	
+        // Serial Number Generator
+        function GenerateRandomNumber(min,max){
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        // Generates a random alphanumberic character
+        function GenerateRandomChar() {
+            var chars = "1234567890ABCDEFGIJKLMNOPQRSTUVWXYZ";
+            var randomNumber = GenerateRandomNumber(0,chars.length - 1);
+            return chars[randomNumber];
+        }
+        // Generates a Serial Number, based on a certain mask
+        function GenerateSerialNumber(mask){
+            var serialNumber = "";
+            if(mask != null){
+                for(var i=0; i < mask.length; i++){
+                    var maskChar = mask[i];
+                    serialNumber += maskChar == "0" ? GenerateRandomChar() : maskChar;
+                }
+            }
+            return serialNumber;
+        }
+        
+        var nmr = sender.id
+        var obj = pendaftar.some((val) => {
+            return val.id === nmr
+        })
+        var cekage = pendaftar.some((val) => {
+            return val.id === nmr && val.umur >= 18
+        })
+
+        function monospace(string) {
+            return '```' + string + '```'
+        }
+
+
+        function isReg(obj){
+            if (obj === true){
+                return false
+            } else {     
+                return dxxoo.reply(from, `Kamu Harus Daftar dulu Beb\nuntuk mendaftar kirim ${prefix}daftar |nama|umur\n\ncontoh format: ${prefix}daftar |dimas|7\n\ncukup gunakan nama depan/panggilan saja`, id) //if user is not registered
+            }
+        }
+
+        function cekumur(obj){
+            if (obj === true){
+                return false
+            } else {
+                return dxxoo.reply(from, `Kamu belum cukup umur untuk menggunakan Fitur 18+, Minimal Umur 18 tahun`, id) //if user is not registered
+            }
+        }
+
+		
         const apakah = [
             'Ya',
             'Tidak',
@@ -359,6 +518,147 @@ module.exports = HandleMsg = async (dxxoo, message) => {
             break
         }
 
+
+        //register
+        case 'daftar':  // NAMBAHIN NOMOR DI DATABASE
+                argz = body.trim().split('|')
+                if (argz.length >= 2) {
+                const nonye = sender.id
+                const namanye = argz[1]
+                const umurnye = argz[2]
+                    if(isNaN(umurnye)) return await dxxoo.reply(from, 'Umur harus berupa angka!!', id)
+                    if(umurnye >= 40) return await dxxoo.reply(from, 'Kamu terlalu tua, kembali lagi ke masa muda untuk menggunakan Bot', id)
+                    const jenenge = namanye.replace(' ','')
+                    var ceknya = nonye
+                        var obj = pendaftar.some((val) => {
+                            return val.id === ceknya
+                        })
+                        if (obj === true){
+                            return dxxoo.reply(from, 'kamu sudah terdaftar', id) // BAKAL RESPON JIKA NO UDAH ADA
+                        } else {
+                            const mentah = await dxxoo.checkNumberStatus(nonye) // PENDAFTARAN
+                            const msg = monospace(`Pendaftaran berhasil dengan SN: ${SN} pada ${moment().format('DD/MM/YY HH:mm:ss')}
+₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋₋
+[Nama]: ${jenenge} [@${nonye.replace(/[@c.us]/g, '')}]
+[Nomor]: wa.me/${nonye.replace('@c.us', '')}
+[Umur]: ${umurnye}
+⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻⁻
+Untuk menggunakan bot silahkan kirim ${prefix}menu`)
+                            const hasil = mentah.canReceiveMessage ? msg : false
+                            if (!hasil) return dxxoo.reply(from, 'Nomor WhatsApp tidak valid [ Tidak terdaftar di WhatsApp ]', id) 
+                            {
+                            const register = ({
+                                id: mentah.id._serialized,
+                                nama: jenenge,
+                                umur: umurnye
+                            })
+                            pendaftar.push(register)
+                            fs.writeFileSync('./lib/data/user.json', JSON.stringify(pendaftar)) // DATABASE
+                                dxxoo.sendTextWithMentions(from, hasil)
+                            }
+                        }
+                    } else {
+                        await dxxoo.reply(from, `Format yang kamu masukkan salah, kirim ${prefix}daftar |nama|umur\n\ncontoh format: ${prefix}daftar |dimas|17\n\ncukup gunakan nama depan/panggilan saja`, id) //if user is not registered
+                    }
+                break			
+			
+            // Level [BETA]
+            case 'levellist':
+            if(isReg(obj)) return
+            if (!isGroupMsg) return dxxoo.reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
+            if (!isLevelingOn) return dxxoo.reply(from, `Fitur Level Belum di Aktifkan\n\nSilahkan ketik ${prefix}leveling`, id)
+            await dxxoo.sendText(from, menuId.levellist())
+            break
+            case 'level':
+                if (!isReg) return await dxxoo.reply(from, 'Kamu Belum Terdaftar Paok!!!', id)
+                if (!isLevelingOn) return dxxoo.reply(from, `Fitur Level Belum di Aktifkan\n\nSilahkan ketik ${prefix}leveling`, id)
+                if (!isGroupMsg) return await dxxoo.reply(from, 'Fitur Hanya bisa di gunakan di dalam group', id)
+                const getUserRole = level.getLevelingRole(sender.id, _level)
+                const userLevel = level.getLevelingLevel(sender.id, _level)
+                const userXp = level.getLevelingXp(sender.id, _level)
+                if (userLevel === undefined && userXp === undefined) return await dxxoo.reply(from, 'Kamu belum memiliki level!', id)
+                const ppLink = await dxxoo.getProfilePicFromServer(sender.id)
+                if (ppLink === undefined) {
+                    var pepe = errorImg
+                } else {
+                    var pepe = ppLink
+                }
+                const bege = card.getBg(sender.id, _bg)
+                const requiredXp = 200 * (Math.pow(2, userLevel) - 1)
+                const randomHexs = `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`
+                const randomHex = `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`
+                const rank = new canvas.Rank()
+                    .setAvatar(pepe)
+                    .setLevel(userLevel)
+                    .setRank(1, `${getUserRole}`, true)
+                    .setCurrentXP(userXp)
+                    .setRequiredXP(requiredXp)
+                    .setProgressBar([randomHexs, randomHex], 'GRADIENT')
+                    .setBackground('IMAGE', bege)
+                    .setUsername(pushname)
+                    .setDiscriminator(sender.id.substring(6, 10))
+                rank.build()
+                    .then(async (buffer) => {
+                        canvas.write(buffer, `${pushname}_card.png`)
+                        await dxxoo.sendFile(from, `${pushname}_card.png`, `${pushname}_card.png`, '', id)
+                        fs.unlinkSync(`${pushname}_card.png`)
+                    })
+                    .catch(async (err) => {
+                        console.error(err)
+                        await dxxoo.reply(from, 'Error!', id)
+                    })
+            break
+            case 'leaderboard':
+                if (!isReg) return await dxxoo.reply(from, 'Kamu Belum Terdaftar Paok!!!', id)
+                if (!isLevelingOn) return dxxoo.reply(from, `Fitur Level Belum di Aktifkan\n\nSilahkan ketik ${prefix}leveling`, id)
+                if (!isGroupMsg) return await dxxoo.reply(from, 'Fitur Hanya bisa di gunakan di dalam group', id)
+                _level.sort((a, b) => (a.xp < b.xp) ? 1 : -1)
+                let leaderboard = '-----[ *LEADERBOARD* ]----\n\n'
+                let nom = 0
+                const arrayLeader = []
+                try {
+                    for (let i = 0; i < 10; i++) {
+                        arrayLeader.push(await dxxoo.getContact(_level[i].id))
+                        nom++
+                        leaderboard += `${nom}. ${arrayLeader[i].pushname}\nwa.me/${_level[i].id.replace('@c.us', '')}\n➸ *XP*: ${_level[i].xp} *Level*: ${_level[i].level}\n\n`
+                    }
+                    leaderboard += `\n\n_=_=_=_=_=_=_=_=_=_=_=_=\n\nYour progress:\n➸ *XP*: ${level.getLevelingXp(sender.id)} *Level*: ${level.getLevelingLevel(sender.id)}`
+                    await dxxoo.reply(from, leaderboard, id)
+                } catch (err) {
+                    console.error(err)
+                    await dxxoo.reply(from, 'Perlu setidaknya *10* user yang memiliki level di database!', id)
+                }
+            break
+            case 'setbackground':
+            case 'setbg':
+                if (!isReg) return await dxxoo.reply(from, 'Kamu Belum Terdaftar Paok!!!', id)
+                if (!isLevelingOn) return dxxoo.reply(from, `Fitur Level Belum di Aktifkan\n\nSilahkan ketik ${prefix}leveling`, id)
+                if (!isGroupMsg) return await dxxoo.reply(from, 'Fitur Hanya bisa di gunakan di dalam group', id)
+                if (!isUrl(url)) return await dxxoo.reply(from, `Tidak Ada Link Images\n\nContoh : #setbackground https://i.ibb.co/g6qVhj8/image-2021-01-14-072057.png`, id)
+                const levels = level.getLevelingLevel(sender.id, _level)
+                const xps = level.getLevelingXp(sender.id, _level)
+                if (levels === undefined && xps === undefined) return await dxxoo.reply(from, 'Kamu belum memiliki level!', id)
+                card.replaceBg(sender.id, url, _bg)
+                await dxxoo.reply(from, 'Success set new background!', id)
+            break
+            case 'leveling':
+                if (!isReg) return await dxxoo.reply(from, 'Kamu Belum Terdaftar Paok!!!', id)
+                if (!isGroupMsg) return await dxxoo.reply(from, 'Fitur Hanya bisa di gunakan di dalam group', id)
+                if (!isGroupAdmins) return await dxxoo.reply(from, 'Fitur Hanya bisa di gunakan oleh admin', id)
+                if (args[0] === 'on') {
+                    if (isLevelingOn) return await dxxoo.reply(from, 'Fitur leveling telah diaktifkan sebelumnya.', id)
+                    _leveling.push(groupId)
+                    fs.writeFileSync('./lib/data/function/group/leveling.json', JSON.stringify(_leveling))
+                    await dxxoo.reply(from, 'Fitur leveling berhasil *diaktifkan*!', id)
+                } else if (args[0] === 'off') {
+                    _leveling.splice(groupId, 1)
+                    fs.writeFileSync('./lib/data/function/group/leveling.json', JSON.stringify(_leveling))
+                    await dxxoo.reply(from, `Fitur leveling berhasil *dinonaktifkan*!`, id)
+                } else {
+                    await dxxoo.reply(from, `Untuk mengaktifkan Fitur Level pada Group Chat\n\nPenggunaan\n${prefix}leveling on --mengaktifkan\n${prefix}leveling off --nonaktifkan\n`, id)
+                }
+            break			
+			
 	//Sticker Converter
 
        case 'emojisticker':
