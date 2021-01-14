@@ -71,6 +71,12 @@ after running it you need to scan the qr
 
 ## Features
 
+| Level Menu |Yes|
+| ------------- | ------------- |
+| Level |✅|
+| Leaderboard Level |✅|
+| Set Background Level |✅|
+
 | 18+ |Yes|
 | ------------- | ------------- |
 | Nekopoi |✅|
@@ -176,6 +182,7 @@ after running it you need to scan the qr
 
 | Others |Yes|
 | ------------- | ------------- |
+| Register |✅|
 | Cek Speed Bot|✅|
 | Teks to Sound/Voice|✅|
 | Translate teks|✅|
