@@ -360,6 +360,46 @@ module.exports = HandleMsg = async (dxxoo, message) => {
             'Orang Suksesss...... tapi boong',
             'Beban Keluarga' //tambahin  aja
             ]
+	
+        const sotoy = [
+        '🍊 : 🍒 : 🍐',
+        '🍒 : 🔔 : 🍊',
+        '🍇 : 🍒 : 🍐',
+        '🍊 : 🍋 : 🔔',
+        '🔔 : 🍒 : 🍐',
+        '🔔 : 🍒 : 🍊',
+        '🍊 : 🍋 : 🔔',        
+        '🍐 : 🍒 : 🍋',
+        '🍐 : 🍐 : 🍐',
+        '🍊 : 🍒 : 🍒',
+        '🔔 : 🔔 : 🍇',
+        '🍌 : 🍒 : 🔔',
+        '🍐 : 🔔 : 🔔',
+        '🍊 : 🍋 : 🍒',
+        '🍋 : 🍋 : 🍌',
+        '🔔 : 🔔 : 🍇',
+        '🔔 : 🍐 : 🍇',
+        '🔔 : 🔔 : 🔔',
+        '🍒 : 🍒 : 🍒',
+        '🍌 : 🍌 : 🍌',
+        '🍇 : 🍇 : 🍇',
+        '🍊 : 🍒 : 🍒',
+        '🔔 : 🔔 : 🍇',
+        '🍌 : 🍒 : 🔔',
+        '🍐 : 🔔 : 🔔',
+        '🍊 : 🍋 : 🍒',
+        '🍋 : 🍋 : 🍌',
+        '🔔 : 🔔 : 🍇',
+        '🔔 : 🍐 : 🍇',
+        '🍊 : 🍒 : 🍐',
+        '🍒 : 🔔 : 🍊',
+        '🍇 : 🍒 : 🍐',
+        '🍊 : 🍋 : 🔔',
+        '🔔 : 🍒 : 🍐',
+        '🔔 : 🍒 : 🍊',
+        '🍊 : 🍋 : 🔔',        
+        '🍐 : 🍒 : 🍋'
+        ]
 
         // [BETA] Avoid Spam Message
         if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) { return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname)) }
@@ -1965,6 +2005,26 @@ ${desc}\n\nBy : @dimaass.cc`)
             break
 
 		//Fun Menu
+                case 'slot':
+                if(isReg(obj)) return
+                if (!isGroupMsg) return dxxoo.reply(from, menuId.textPrem(), id)
+                const somtoy = sotoy[Math.floor(Math.random() * (sotoy.length))]    
+                const somtoyy = sotoy[Math.floor(Math.random() * (sotoy.length))]   
+                const somtoyyy = sotoy[Math.floor(Math.random() * (sotoy.length))]  
+                if (somtoyy  == '🍌 : 🍌 : 🍌') {
+                dxxoo.sendText(from, `[ 🎰 SLOTS 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n*DIH LU KO HOKI BANGET SIH ASU!!*`, id)
+                } else if (somtoyy == '🍒 : 🍒 : 🍒') {
+                dxxoo.sendText(from, `[ 🎰 |SLOTS| 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n*DIH LU KO HOKI BANGET SIH ASU!!*`, id)
+                } else if (somtoyy == '🔔 : 🔔 : 🔔') {
+                dxxoo.sendText(from, `[ 🎰 |SLOTS| 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n*DIH LU KO HOKI BANGET SIH ASU!!*`, id)
+                } else if (somtoyy == '🍐 : 🍐 : 🍐') {
+                dxxoo.sendText(from, `[ 🎰 |SLOTS| 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n*DIH LU KO HOKI BANGET SIH ASU!!*`, id)
+                } else if (somtoyy == '🍇 : 🍇 : 🍇') {
+                dxxoo.sendText(from, `[ 🎰 |SLOTS| 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n*DIH LU KO HOKI BANGET SIH ASU!!*`, id)
+                } else {
+                dxxoo.sendText(from, `[ 🎰 |SLOTS| 🎰 ]\n-----------------\n${somtoy}\n${somtoyy} ◀️\n${somtoyyy}\n-----------------\n[ 🎰 |SLOTS| 🎰 ]\n\n`, id)
+                }
+            break
         case 'say':
            const says = args.join(' ')
            await dxxoo.sendText(from, `${says}`)
