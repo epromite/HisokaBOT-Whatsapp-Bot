@@ -248,3 +248,4 @@ Fix Stuck on linux, install google chrome stable:
 - [YogaSakti](https://github.com/YogaSakti)
 - [MhankBarBar](https://github.com/MhankBarBar)
 - [dandyraka](https://github.com/dandyraka)
+- [Eduardoavargas](https://github.com/Eduardoavargas)
