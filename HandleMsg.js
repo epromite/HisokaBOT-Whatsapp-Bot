@@ -129,7 +129,7 @@ module.exports = HandleMsg = async (dxxoo, message) => {
 		const { level, card } = require('./lib/data/function')
 
         //database level
-        const _leveling = JSON.parse(fs.readFileSync('./lib/data/function/group/leveling.json'))
+        const _leveling = JSON.parse(fs.readFileSync('./lib/data/function/user/group/leveling.json'))
         const _level = JSON.parse(fs.readFileSync('./lib/data/function/user/level.json'))
         const _bg = JSON.parse(fs.readFileSync('./lib/data/function/user/card/background.json'))
         const isLevelingOn = isGroupMsg ? _leveling.includes(groupId) : false
