@@ -1,6 +1,9 @@
 {
-    "apiNoBg": "APIKEY",
-    "apiSS": "APIKEY",
-    "apiSimi": "APIKEY",
-    "vhtearkey": "YOUR-API-KEY" //Kalian Bisa Bel di https://vhtear.com/
+    "apiNoBg": "https://st4rz.herokuapp.com/apihttps://st4rz.herokuapp.com/api"
+,
+    "apiSS": "https://st4rz.herokuapp.com/api"
+,
+    "apiSimi": "https://st4rz.herokuapp.com/api
+",
+    "vhtearkey": "https://st4rz.herokuapp.com/api" //Kalian Bisa Bel di https://vhtear.com/
 }
