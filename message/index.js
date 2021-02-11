@@ -1431,19 +1431,19 @@ module.exports = msgHandler = async (hisoka = new Client(), message) => {
                     })
             break
             case 'playv': // Alvio Adji Januar 
-                if (!isRegistered) return await bocchi.reply(from, ind.notRegistered(), id)
-                if (!q) return await bocchi.reply(from, ind.wrongFormat(), id)
-                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await bocchi.reply(from, ind.limit(), id)
+                if (!isRegistered) return await hisoka.reply(from, ind.notRegistered(), id)
+                if (!q) return await hisoka.reply(from, ind.wrongFormat(), id)
+                if (limit.isLimit(sender.id, _limit, limitCount, isPremium, isOwner)) return await hisoka.reply(from, ind.limit(), id)
                 limit.addLimit(sender.id, _limit, isPremium, isOwner)
-                await bocchi.reply(from, ind.wait() ,id)
+                await hisoka.reply(from, ind.wait() ,id)
                 const getvid = await axios.get(`https://api.zeks.xyz/api/ytplaymp4/2?apikey=apivinz&q=${q}`)
                 if (getvid.data.status === false) {
-                    await bocchi.reply(from, getvid.data.message, id)
+                    await hisoka.reply(from, getvid.data.message, id)
                 } else if (Number(getvid.data.result.size.split('MB')[0]) >= 10.00) {
-                    await bocchi.reply(from, 'Maaf durasi musik sudah melebihi batas maksimal 10 MB!', id)
+                    await hisoka.reply(from, 'Maaf durasi musik sudah melebihi batas maksimal 10 MB!', id)
                 } else {
-                    await bocchi.sendFileFromUrl(from, getvid.data.result.thumb, 'thumb.jpg', `Title: ${getvid.data.result.title}\n\n───────────⚪───────────\n(っ◔◡◔)っ\n───────────⚪───────────\n➥Size: ${getvid.data.result.size}\n➥Type: Mp4\n➥Link Download: ${getvid.data.result.link}\n\n*Mohon Tunggu Bot Akan Mengirim Video!*`, id)
-                    await bocchi.sendFileFromUrl(from, getvid.data.result.link, 'play.mp4' , '', id)
+                    await hisoka.sendFileFromUrl(from, getvid.data.result.thumb, 'thumb.jpg', `Title: ${getvid.data.result.title}\n\n───────────⚪───────────\n(っ◔◡◔)っ\n───────────⚪───────────\n➥Size: ${getvid.data.result.size}\n➥Type: Mp4\n➥Link Download: ${getvid.data.result.link}\n\n*Mohon Tunggu Bot Akan Mengirim Video!*`, id)
+                    await hisoka.sendFileFromUrl(from, getvid.data.result.link, 'play.mp4' , '', id)
                 }
             break
             case 'whois':
