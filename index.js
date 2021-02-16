@@ -3,6 +3,8 @@ const { create, Client } = require('@open-wa/wa-automate')
 const { color, options } = require('./tools')
 const { ind, eng } = require('./message/text/lang/')
 const { loader } = require('./function')
+const { version, bugs } = require('./package.json')
+const msgHandler = require('./message/index.js')
 const figlet = require('figlet')
 const canvas = require('discord-canvas')
 const config = require('./config.json')
@@ -13,10 +15,12 @@ const { groupLimit, memberLimit } = require('./database/bot/setting.json')
 const start = (hisoka = new Client()) => {
     console.log(color(figlet.textSync('HisokaBOT', 'Larry 3D'), 'cyan'))
     console.log(color('=> Bot successfully loaded! Database:', 'yellow'), color(loader.getAllDirFiles('./database').length), color('Library:', 'yellow'), color(loader.getAllDirFiles('./lib').length), color('Function:', 'yellow'), color(loader.getAllDirFiles('./function').length))
+    console.log(color('=> Source code version:', 'yellow'), color(version))
+    console.log(color('=> Bugs? Errors? Suggestions? Visit here:', 'yellow'), color(bugs.url))
     console.log(color('[hisoka]'), color('HisokaBOT is now online!', 'yellow'))
     console.log(color('[DEV]', 'cyan'), color('Welcome back, Owner! Hope you are doing well~', 'magenta'))
 
-    loader.nocache('../message/index.js', (m) => console.log(color('[WATCH]', 'orange'), color(`=> '${m}'`, 'yellow'), 'file is updated!'))
+    //loader.nocache('../message/index.js', (m) => console.log(color('[WATCH]', 'orange'), color(`=> '${m}'`, 'yellow'), 'file is updated!'))
 
     hisoka.onStateChanged((state) => {
         console.log(color('[HISOKA]'), state)
@@ -50,7 +54,8 @@ const start = (hisoka = new Client()) => {
                     console.log(color('[HISOKA]'), color('Cache deleted!', 'yellow'))
                 }
             })
-        require('./message/index.js')(hisoka, message)
+        msgHandler(bocchi, message)
+        // require('./message/index.js')(bocchi, message)
     })
 
     hisoka.onIncomingCall(async (callData) => {
